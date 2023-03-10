@@ -1,0 +1,259 @@
+
+//reset
+* {
+  box-sizing: border-box; //以边框为准，这样在对网页内容进行margin.padding时不会撑大盒子
+  outline: none;
+}
+html {
+  font-size: 16px; //页面基础字体大小
+  
+}
+.mybj{
+  // background-image: url(../assets/wdbj.jpg);
+  width: 100%;
+  height: 40vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  
+}
+.bj-ft{
+  margin-top: -110px;
+}
+.m-auto{
+  margin: 0 auto 0 auto;
+}
+.auto{
+  margin: auto;
+}
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2rem;
+
+}
+a {
+  color: #999;
+}
+p{
+  line-height:1.5rem;
+}
+//colors
+$colors: (
+  "primary": #db9e3f,
+  "info": #8fdee2,
+  "blue":#4304e4,
+  "bule-1":#1f3695,
+  "danger":#791a15,
+  "white": #fff,
+  "light": #f9f9f9,
+  "light-1": #d4d9de,
+  "grey": #999,
+  "grey-1": #666,
+  "dark-1": #343440,
+  "dark": #222,
+  "black": #000,
+);
+$border-color:map-get($colors, 'light-1' );
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+
+//text align
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var !important;
+  }
+}
+//font size
+$base-font-size: 1rem;
+$font-sizes: (
+  a: 0.6154, 
+  b: 0.7692, 
+  c: 0.9231, 
+  d: 1,
+  e: 1.0769, 
+  f: 1.2308,
+  g:1.5385,
+  h:1.8462,
+  
+);
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
+//text overflow  单行显示溢出显示省略号
+.text-ellipsis{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+  //width height
+  .w-50{
+    width: 50%;
+  }
+  .h-50{
+    height: 50%;
+  }
+//flex
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-wrap{
+  flex-wrap: wrap;
+}
+$flex-jc: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+);
+@each $key, $value in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+$flex-ai: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  stretch: stretch,
+);
+@each $key, $value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+.flex-1 {
+  flex: 1;
+}
+//spacing
+$spacing-types: (
+  m: margin,
+  p: padding,
+);
+$spacing-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left,
+);
+$spacing-base-size: 1rem;
+$spacing-sizes: (
+  0: 0,
+  1: 0.5,
+  88:0.65,
+  2: 1,
+  3: 1.5,
+  4: 2,
+  5: 2.5,
+  6:3,
+  7:4,
+  8:5,
+  9:6,
+  10:7,
+  11:8,
+  12:9,
+  13:10,
+  14:11,
+  99:-5
+);
+@each $typeKey, $type in $spacing-types {
+  
+  //.m-1
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+  }
+  //.mx-1,.my-1(即设置水平或者垂直的margin-padding为0)
+  @each $sizeKey, $size in $spacing-sizes {
+    //.mx-1
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$type}-left: $size * $base-font-size;
+      #{$type}-right: $size * $base-font-size;
+    }
+    //.my-1
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-bottom: $size * $base-font-size;
+      #{$type}-top: $size * $base-font-size;
+    }
+  }
+
+  //.mt-1
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
+}
+//button
+.btn {
+  border: none;
+  border-radius: 0.1538rem;
+  font-size: map-get($font-sizes, "a") * $base-font-size;
+  padding: 0.2rem 0.6rem;
+  &.btn-lg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i{
+      color:map-get($colors,'primary' );
+      font-weight:bold;
+      font-size: 1.5rem;
+      margin-right: .5rem;
+    }
+    background:map-get($colors,'light' );
+    border:.1rem solid map-get($colors, 'white-2' );
+    padding: .8rem 1rem;
+    font-size: 1rem;
+  }
+}
+//nav
+.nav {
+
+
+  .panel {
+    //给这个加一个透明边框可以预防框对不齐
+    border-bottom: 3px solid transparent;
+    padding-bottom: 0.3rem;
+    .active {
+      border-bottom: 3px solid rgb(255, 255, 255);
+      color: rgb(255, 255, 255);
+      font-weight: bold;
+      // color:map-get($colors,'primary');
+      // //给紧跟的元素即这里的平级的active加一个&
+      // border-bottom-color: map-get($colors, 'primary' );
+    }
+  }
+  // &.nav-inverse{
+  //   .nav-item{
+  //     color: map-get($colors, 'white' );
+  //     &.active{
+  //       border-bottom-color:map-get($colors, 'white' ) ;
+  //     // }
+  //   }
+  // }
+}
+//sprite
+
+//borders
+@each $dir in (top,right,bottom,left) {
+  .border-#{$dir}{
+    border-#{$dir}:1px solid $border-color;
+  }
+  
+}
